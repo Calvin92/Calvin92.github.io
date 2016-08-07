@@ -220,32 +220,4 @@
     
   </entry>
   
-  <entry>
-    <title>做个测试</title>
-    <link href="http://www.ruanjiawei.com/2016/08/07/hello-world/"/>
-    <id>http://www.ruanjiawei.com/2016/08/07/hello-world/</id>
-    <published>2016-08-06T17:08:27.000Z</published>
-    <updated>2016-08-07T13:10:04.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to my website! This is your very first post. </p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ heheda</div></pre></td></tr></table></figure>
-<p>More info: 呵呵</p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ heheda</div></pre></td></tr></table></figure>
-<p>More info: 呵呵</p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ heheda</div></pre></td></tr></table></figure>
-<p>More info: 呵呵</p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ heheda</div></pre></td></tr></table></figure>
-<p>More info: 呵呵哒</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to my website! This is your very first post. &lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Sta
-    
-    </summary>
-    
-    
-  </entry>
-  
 </feed>
