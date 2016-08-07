@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.ruanjiawei.com/"/>
-  <updated>2016-08-07T16:40:56.000Z</updated>
+  <updated>2016-08-07T16:43:41.000Z</updated>
   <id>http://www.ruanjiawei.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.ruanjiawei.com/2016/08/08/Start-Developing-iOS-Apps-Swift-2/"/>
     <id>http://www.ruanjiawei.com/2016/08/08/Start-Developing-iOS-Apps-Swift-2/</id>
     <published>2016-08-07T16:16:00.000Z</published>
-    <updated>2016-08-07T16:40:56.000Z</updated>
+    <updated>2016-08-07T16:43:41.000Z</updated>
     
     <content type="html"><![CDATA[<p>你的第一门课程将会以playground的形式呈现。如第一章所说，playground是一种文件类型，它能让你在其中修改你的Swift代码，并能立即看到代码的运行结果。Playgrounds对于Swift学习和尝试是很棒的一个功能，它能帮助你加速对Swift基础概念的了解。 </p>
 <h3 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h3><p>在本章的最后，你将掌握以下这些：</p>
@@ -157,7 +157,7 @@
     <link href="http://www.ruanjiawei.com/2016/08/08/Start-Developing-iOS-Apps-Swift-1/"/>
     <id>http://www.ruanjiawei.com/2016/08/08/Start-Developing-iOS-Apps-Swift-1/</id>
     <published>2016-08-07T16:01:21.000Z</published>
-    <updated>2016-08-07T16:28:13.000Z</updated>
+    <updated>2016-08-07T16:42:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>这个教程（入门教程－使用swift开发iOS应用）对于构建运行于iPhone和iPad的应用来说是一个很好的入门教程。把这些课程当作一个指导性的入门教程来看，用它来创建你的第一个app－这个app包括工具（tools）、主要的概念和最好的体验，这些将会帮助你少走弯路。  </p>
 <p>每个章节都含有详细的教程，通过这些指导你需要去掌握这些概念性的信息。针对你们所有人创建的这些课程，将会帮助你们一步一步地创建一个简单而真实的iOS应用。 </p>
@@ -187,6 +187,8 @@
       &lt;p&gt;这个教程（入门教程－使用swift开发iOS应用）对于构建运行于iPhone和iPad的应用来说是一个很好的入门教程。把这些课程当作一个指导性的入门教程来看，用它来创建你的第一个app－这个app包括工具（tools）、主要的概念和最好的体验，这些将会帮助你少走弯路。  &lt;
     
     </summary>
+    
+      <category term="Swift" scheme="http://www.ruanjiawei.com/categories/Swift/"/>
     
     
       <category term="Swift" scheme="http://www.ruanjiawei.com/tags/Swift/"/>
