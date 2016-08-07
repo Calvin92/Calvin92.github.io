@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>开车上纽北</title>
+  <subtitle>一个在灯红酒绿的大城市五环外飙车的老司机</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.ruanjiawei.com/"/>
+  <updated>2016-08-07T13:02:14.000Z</updated>
+  <id>http://www.ruanjiawei.com/</id>
+  
+  <author>
+    <name>Calvin1992</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>迷糊的周末</title>
+    <link href="http://www.ruanjiawei.com/2016/08/07/my-first-blog/"/>
+    <id>http://www.ruanjiawei.com/2016/08/07/my-first-blog/</id>
+    <published>2016-08-07T12:50:45.000Z</published>
+    <updated>2016-08-07T13:02:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://music.163.com/#/song?id=94682" target="_blank" rel="external">如何掉眼泪</a> </p>
+<p>上了三天班的一周，迷迷糊糊到了周末。</p>
+<p>每天凌晨两点才熄灯，却浑然不知做了些什么。玩了三个月的游戏，每天晚上清任务，乐此不疲。 </p>
+<p>项目组的突然解散，面临着一系列纠结的选择。面了唯品会主站，过了，却没啥意思，不重新定级的新工作都是耍流氓。老大要带我们去VIS，去就去吧，反正现在不跳槽，明年初也走了。 </p>
+<p>喜欢组里的同事，特别是客户端、前端和测试的同学，每天都能打成一片。听说测试和客户端要被分散在不同的项目组，心乱如麻。 </p>
+<p>Anyway，明天就知道答案了～</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://music.163.com/#/song?id=94682&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何掉眼泪&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;上了三天班的一周，迷迷糊糊到了周末。&lt;/p&gt;
+&lt;p&gt;每天凌晨两点才熄灯，却浑然不知
+    
+    </summary>
+    
+      <category term="躁动的心" scheme="http://www.ruanjiawei.com/categories/%E8%BA%81%E5%8A%A8%E7%9A%84%E5%BF%83/"/>
+    
+    
+      <category term="死宅" scheme="http://www.ruanjiawei.com/tags/%E6%AD%BB%E5%AE%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我的第一个Hexo demo</title>
+    <link href="http://www.ruanjiawei.com/2016/08/07/hello-world/"/>
+    <id>http://www.ruanjiawei.com/2016/08/07/hello-world/</id>
+    <published>2016-08-06T17:08:27.000Z</published>
+    <updated>2016-08-06T17:40:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
