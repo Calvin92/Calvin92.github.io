@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.ruanjiawei.com/"/>
-  <updated>2016-08-07T13:02:14.000Z</updated>
+  <updated>2016-08-07T13:06:38.000Z</updated>
   <id>http://www.ruanjiawei.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.ruanjiawei.com/2016/08/07/my-first-blog/"/>
     <id>http://www.ruanjiawei.com/2016/08/07/my-first-blog/</id>
     <published>2016-08-07T12:50:45.000Z</published>
-    <updated>2016-08-07T13:02:14.000Z</updated>
+    <updated>2016-08-07T13:06:38.000Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://music.163.com/#/song?id=94682" target="_blank" rel="external">如何掉眼泪</a> </p>
 <p>上了三天班的一周，迷迷糊糊到了周末。</p>
@@ -32,9 +32,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;a href=&quot;http://music.163.com/#/song?id=94682&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;如何掉眼泪&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;上了三天班的一周，迷迷糊糊到了周末。&lt;/p&gt;
-&lt;p&gt;每天凌晨两点才熄灯，却浑然不知
+      &lt;p&gt;上了三天班的一周，迷迷糊糊到了周末。&lt;/p&gt;&lt;p&gt;每天凌晨两点才熄灯，却浑然不知做了些什么。玩了三个月的游戏，每天晚上清任务，乐此不疲。&lt;/p&gt;
     
     </summary>
     
@@ -46,26 +44,27 @@
   </entry>
   
   <entry>
-    <title>我的第一个Hexo demo</title>
+    <title>做个测试</title>
     <link href="http://www.ruanjiawei.com/2016/08/07/hello-world/"/>
     <id>http://www.ruanjiawei.com/2016/08/07/hello-world/</id>
     <published>2016-08-06T17:08:27.000Z</published>
-    <updated>2016-08-06T17:40:25.000Z</updated>
+    <updated>2016-08-07T13:10:04.000Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    <content type="html"><![CDATA[<p>Welcome to my website! This is your very first post. </p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ heheda</div></pre></td></tr></table></figure>
+<p>More info: 呵呵</p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ heheda</div></pre></td></tr></table></figure>
+<p>More info: 呵呵</p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ heheda</div></pre></td></tr></table></figure>
+<p>More info: 呵呵</p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ heheda</div></pre></td></tr></table></figure>
+<p>More info: 呵呵哒</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;p&gt;Welcome to my website! This is your very first post. &lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Sta
     
     </summary>
     
