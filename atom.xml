@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.ruanjiawei.com/"/>
-  <updated>2016-08-08T07:01:09.000Z</updated>
+  <updated>2016-08-08T07:04:49.000Z</updated>
   <id>http://www.ruanjiawei.com/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>苹果官方iOS入门教程译版之第三章：Build a Basic UI</title>
-    <link href="http://www.ruanjiawei.com/2016/08/08/Start-Developing-iOS-Apps-Swift-3/"/>
-    <id>http://www.ruanjiawei.com/2016/08/08/Start-Developing-iOS-Apps-Swift-3/</id>
-    <published>2016-08-08T01:16:00.000Z</published>
-    <updated>2016-08-08T07:01:09.000Z</updated>
+    <link href="http://www.ruanjiawei.com/2016/08/07/Start-Developing-iOS-Apps-Swift-3/"/>
+    <id>http://www.ruanjiawei.com/2016/08/07/Start-Developing-iOS-Apps-Swift-3/</id>
+    <published>2016-08-07T01:16:00.000Z</published>
+    <updated>2016-08-08T07:04:49.000Z</updated>
     
     <content type="html"><![CDATA[<p>这章会带你熟悉用来写应用的工具－－Xcode。你将会熟悉Xcode中的项目结构，学会如何在导航之间跳转以及学会使用基本的项目组件。这一整章中，你将会开始为FoodTracker应用创建一个简单的用户接界面（UI,user interface），并且让它在模拟器中显示出来。当你完成这些之后，你的应用（app）将会像下面这样：<br><img src="https://calvin92.gitbooks.io/apple-ios-swift-start/content/images/Build-a-Basic-UI/2_sim_finalUI_2x.png" alt="result_UI">  </p>
 <h3 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h3><p>在本章的最后，你将会学习到以下知识：</p>
@@ -214,10 +214,10 @@
   
   <entry>
     <title>苹果官方iOS入门教程译版之第二章：Learn the Essentials of Swift</title>
-    <link href="http://www.ruanjiawei.com/2016/08/08/Start-Developing-iOS-Apps-Swift-2/"/>
-    <id>http://www.ruanjiawei.com/2016/08/08/Start-Developing-iOS-Apps-Swift-2/</id>
-    <published>2016-08-07T16:16:00.000Z</published>
-    <updated>2016-08-07T16:43:41.000Z</updated>
+    <link href="http://www.ruanjiawei.com/2016/07/30/Start-Developing-iOS-Apps-Swift-2/"/>
+    <id>http://www.ruanjiawei.com/2016/07/30/Start-Developing-iOS-Apps-Swift-2/</id>
+    <published>2016-07-29T16:16:00.000Z</published>
+    <updated>2016-08-08T07:04:42.000Z</updated>
     
     <content type="html"><![CDATA[<p>你的第一门课程将会以playground的形式呈现。如第一章所说，playground是一种文件类型，它能让你在其中修改你的Swift代码，并能立即看到代码的运行结果。Playgrounds对于Swift学习和尝试是很棒的一个功能，它能帮助你加速对Swift基础概念的了解。 </p>
 <h3 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h3><p>在本章的最后，你将掌握以下这些：</p>
@@ -351,10 +351,10 @@
   
   <entry>
     <title>苹果官方iOS入门教程译版之第一章：Jump Right In</title>
-    <link href="http://www.ruanjiawei.com/2016/08/08/Start-Developing-iOS-Apps-Swift-1/"/>
-    <id>http://www.ruanjiawei.com/2016/08/08/Start-Developing-iOS-Apps-Swift-1/</id>
-    <published>2016-08-07T16:01:21.000Z</published>
-    <updated>2016-08-07T16:42:11.000Z</updated>
+    <link href="http://www.ruanjiawei.com/2016/07/19/Start-Developing-iOS-Apps-Swift-1/"/>
+    <id>http://www.ruanjiawei.com/2016/07/19/Start-Developing-iOS-Apps-Swift-1/</id>
+    <published>2016-07-18T16:01:21.000Z</published>
+    <updated>2016-08-08T07:04:27.000Z</updated>
     
     <content type="html"><![CDATA[<p>这个教程（入门教程－使用swift开发iOS应用）对于构建运行于iPhone和iPad的应用来说是一个很好的入门教程。把这些课程当作一个指导性的入门教程来看，用它来创建你的第一个app－这个app包括工具（tools）、主要的概念和最好的体验，这些将会帮助你少走弯路。  </p>
 <p>每个章节都含有详细的教程，通过这些指导你需要去掌握这些概念性的信息。针对你们所有人创建的这些课程，将会帮助你们一步一步地创建一个简单而真实的iOS应用。 </p>
@@ -394,23 +394,26 @@
   
   <entry>
     <title>迷糊的周末</title>
-    <link href="http://www.ruanjiawei.com/2016/08/07/my-first-blog/"/>
-    <id>http://www.ruanjiawei.com/2016/08/07/my-first-blog/</id>
-    <published>2016-08-07T12:50:45.000Z</published>
-    <updated>2016-08-07T15:48:13.000Z</updated>
+    <link href="http://www.ruanjiawei.com/2016/07/02/my-first-blog/"/>
+    <id>http://www.ruanjiawei.com/2016/07/02/my-first-blog/</id>
+    <published>2016-07-02T12:50:45.000Z</published>
+    <updated>2016-08-08T08:19:36.000Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://music.163.com/#/song?id=94682" target="_blank" rel="external">如何掉眼泪</a> </p>
-<p>上了三天班的一周，迷迷糊糊到了周末。</p>
-<p>每天凌晨两点才熄灯，却浑然不知做了些什么。玩了三个月的游戏，每天晚上清任务，乐此不疲。 </p>
-<p>经历了一堆事情，有一段时间没跟过游戏了，也就释然了，弃游也只是在一念间。</p>
-<p>项目组的突然解散，面临着一系列纠结的选择。面了唯品会主站，过了，却没啥意思，不重新定级的新工作都是耍流氓。老大要带我们去VIS，去就去吧，反正现在不跳槽，明年初也走了。 </p>
-<p>喜欢组里的同事，特别是客户端、前端和测试的同学，每天都能打成一片。听说测试和客户端要被分散在不同的项目组，心乱如麻。 </p>
-<p>Anyway，明天就知道答案了～</p>
+<p>难得有时间刷了一遍空间，恍然间发觉，又是毕业季了。</p>
+<p>隔着屏幕都能感受到的毕业季的忧桑，又撩起了一阵阵的回忆。彼时匆忙，从北京回到渣科的时候，已经是武汉闷骚的六月了。匆忙整理完毕业手续的时候，已经到了六月中旬。从东三楼的毕设老师办公室交完最后一份材料出来的时候，路过机械楼，在楼梯上坐了半个下午。</p>
+<p>机械大楼对面是材料学院的大楼，然后作为自家学院的大楼，却没有几次机会进出。两栋大楼之间的校园林荫道上，穿梭着或嬉笑、或抑郁的人流，恍惚间发觉，自己离这些人，竟是那么遥远了。 </p>
+<p>从机械楼走回韵苑的路上，路过绝望坡的时候，正是放学时间，熙熙攘攘的人群开始聚集在这个在我看来并没有那么绝望的坡上－－兴许是陪伴了我两年多后被姚思橙弄丢的小电驴带给我的错觉吧。</p>
+<p>绝望坡两侧分布着各种各样的小店铺，放学时间这里人满为患的总是那些小食堂。转头走进了同窗堂，点了一份木耳炒肉盖饭，随即坐在一个靠窗的角落里，打量着这个我第一次光顾的小店。想起大一刚进来的时候，跟浩然下定决心，要把渣科30多个食堂吃个遍。然而，这几年，几乎永远都是在韵苑大酒店和东园之间徘徊。 </p>
+<p>那天吃完饭，也不晓得是怎么回到寝室的，打开门的时候，看到室友已经把部分东西整理好，打包到角落里了。室友不在，心有些累，爬上床，迷迷糊糊地睡过去了。醒来的时候，已经是夜里10点多，正是寝室最热闹的时候，主席他们过来串门，也不晓得聊了什么，大家都有些伤感。也不知道什么时候大家熄灯上床了，隐隐约约听到浩然床上传来抽泣的声音，在这一刻有些被感染，原来我们距离离别，是那么地近了。 </p>
+<p>距离学校要求离校的deadline还剩两天的时候，大家都已经把东西收拾得差不多，随时准备离校了。那天晚上，那顿聚餐吃得很晚，由CEO带头的哭声感染了在场的所有人，于是大家三三两两地抱在一起痛哭。</p>
+<p>大约到了凌晨，所有人拖着不省人事的浩然往学校走回去。在韵苑足球场，大家围着躺尸的浩然又继续嘻哈了一把。旁边有很多跟我们一样的毕业生，在被泪水冲击过后都大吼大叫地释放自己的情绪，大雕哥还追着操场上的妹子去求抱抱，整个场面夹杂着欢乐的同时，却尽是无尽的伤感－－Anyway，it is the last moment we all enjoy。 </p>
+<p>离别不是终点，但什么时候，我们能在下一个起点重逢？ 不幸的HUST DF1102，我们已经失去了一个可爱的同窗，期待下次的见面，各自安好。<br><img src="../../../../images/graduation.jpg" alt="最后一天，送我离汉的你们"></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;上了三天班的一周，迷迷糊糊到了周末。&lt;/p&gt;&lt;p&gt;每天凌晨两点才熄灯，却浑然不知做了些什么。玩了三个月的游戏，每天晚上清任务，乐此不疲。&lt;/p&gt;
+      &lt;p&gt;难得有时间刷了一遍空间，恍然间发觉，又是毕业季了。&lt;/p&gt;&lt;p&gt;隔着屏幕都能感受到的毕业季的忧桑，又撩起了一阵阵的回忆。彼时匆忙，从北京回到渣科的时候，已经是武汉闷骚的六月了。匆忙整理完毕业手续的时候，已经到了六月中旬。从东三楼的毕设老师办公室交完最后一份材料出来的时候，路过机械楼，在楼梯上坐了半个下午。&lt;/p&gt;
     
     </summary>
     
