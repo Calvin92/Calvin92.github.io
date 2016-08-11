@@ -1,8 +1,61 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="I'am Calvin,a crazy JSer"><title>关于博主 | 开车上纽北</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">关于博主</h1><a id="logo" href="/.">开车上纽北</a><p class="description">一个在灯红酒绿的大城市五环外飙车的老司机</p></div><div id="nav-menu"><a href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/" class="current"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">关于博主</h1><div class="post-content"><p><i class="fa fa-user"></i> Nickname: <a href="http://www.ruanjiawei.com">开车上纽北</a> </p>
 <p><i class="fa fa-envelope"></i> Email: <a href="mailto:calvin1992.js@gmail.com" target="_blank" rel="external">calvin1992.js@gmail.com</a>  </p>
 <p><i class="fa fa-github"></i> Github: <a href="https://github.com/Calvin92" target="_blank" rel="external">@Calvin92</a> </p>
+<p><i class="fa fa-twitter"></i> Weibo: <a href="http://weibo.com/u/2460779377?is_all=1" target="_blank" rel="external">@开车上纽北</a></p>
 <p><i class="fa fa-instagram"></i> Instagram: <a href="https://www.instagram.com/jiawei.ruan" target="_blank" rel="external">@jiawei.ruan</a> </p>
 <p><i class="fa fa-twitter"></i> Twitter: <a href="https://twitter.com/drive_to_niubei" target="_blank" rel="external">@开车上纽北</a></p>
+<p><a id="_donate" href="javascript:void(0)" target="_blank" rel="external">Donate(友情赞助)?</a></p>
+<script async type="text/javascript">
+    window.onload = function() {
+        var donateEle = document.querySelector("#_donate");
+        var parentNode = donateEle.parentNode;
+        parentNode.style.position = "absolute";
+        parentNode.style.top = "-25px";
+        parentNode.style.right = "0"; 
+
+        donateEle.onclick = function() {
+
+            var maskEle = document.createElement("div");
+            maskEle.id = "donate_mask";
+            var wrapEle = document.createElement("div");
+            var imgEle  = document.createElement("img");
+            var body = document.querySelector("body");
+            var captionEle = document.createElement("p");
+            captionEle.textContent = "支付宝下扫描下方二维码即可随心赞助哦～";
+            captionEle.style.textAlign = "center";
+            captionEle.style.color = "#FFFFFF";
+
+            // When click this mask, make itself remove from the body
+            maskEle.onclick = function() {
+                body.removeChild(this);
+            }
+
+            imgEle.src =  "../images/alipay.jpg";
+            imgEle.width = 300;
+            imgEle.height = 300;
+
+            // The style of mask 遮罩样式
+            maskEle.style.backgroundColor = "RGBA(0,0,0,.75)";
+            maskEle.style.position = "fixed";
+            maskEle.style.display = "flex";
+            maskEle.style.height = "100%";
+            maskEle.style.width = "100%";
+            maskEle.style.top = "0";
+            maskEle.style.left = "0";
+            maskEle.style.justifyContent = "center";
+            maskEle.style.alignItems = "center";
+
+
+
+            wrapEle.appendChild(captionEle);
+            wrapEle.appendChild(imgEle);
+            maskEle.appendChild(wrapEle);
+            body.appendChild(maskEle);
+
+        }
+    }
+</script>
+
 </div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://www.ruanjiawei.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Swift/">Swift</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/躁动的心/">躁动的心</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Swift/" style="font-size: 15px;">Swift</a> <a href="/tags/死宅/" style="font-size: 15px;">死宅</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/07/Start-Developing-iOS-Apps-Swift-3/">苹果官方iOS入门教程译版之第三章：Build a Basic UI</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/Start-Developing-iOS-Apps-Swift-2/">苹果官方iOS入门教程译版之第二章：Learn the Essentials of Swift</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/19/Start-Developing-iOS-Apps-Swift-1/">苹果官方iOS入门教程译版之第一章：Jump Right In</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/my-first-blog/">迷糊的周末</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a><ul></ul><a href="http://www.75team.com/" title="奇舞团博客" target="_blank">奇舞团博客</a><ul></ul><a href="http://www.zhangxinxu.com/wordpress/" title="张鑫旭" target="_blank">张鑫旭</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2016 <a href="/." rel="nofollow">开车上纽北 </a>| 桂ICP备14003578号 | Theme by Cho</div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>var duoshuoQuery = {short_name:'ruanjiawei'};
 (function() {
     var ds = document.createElement('script');

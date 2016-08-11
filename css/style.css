@@ -221,6 +221,7 @@ div {
       color: #444; }
   .post .post-content {
     clear: left;
+    position: relative;
     font-size: 15px;
     line-height: 1.77;
     color: #444;
