@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.ruanjiawei.com/"/>
-  <updated>2016-09-09T17:06:09.000Z</updated>
+  <updated>2016-10-18T11:05:39.000Z</updated>
   <id>http://www.ruanjiawei.com/</id>
   
   <author>
@@ -16,14 +16,178 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>colorful-console-log</title>
+    <link href="http://www.ruanjiawei.com/2016/10/18/colorful-console-log/"/>
+    <id>http://www.ruanjiawei.com/2016/10/18/colorful-console-log/</id>
+    <published>2016-10-18T11:05:39.000Z</published>
+    <updated>2016-10-18T11:05:39.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Http缓存</title>
+    <link href="http://www.ruanjiawei.com/2016/09/22/http-caching/"/>
+    <id>http://www.ruanjiawei.com/2016/09/22/http-caching/</id>
+    <published>2016-09-22T08:38:12.000Z</published>
+    <updated>2016-09-29T01:51:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>有时，HTTP中的缓存可能会非常让人头疼。按照文档正确地使用HTTP并不是那么困难，但事实上，不同的浏览器和HTTP版本常常困扰着我们。</p>
+<a id="more"></a>
+<p>通过<a href="http://stackoverflow.com/search?q=http+cache" target="_blank" rel="external">stackoverflow</a>的搜索结果，你可以很轻易地发现很多人有相同的困扰。我们自己或是不必或是没有时间去钻研所有的边缘的情况。 </p>
+<p>所以这里有一些博主总结的实用并速记的规则，并且在未来博主也会持续地跟进和更新。 </p>
+<h3 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h3><p>永远不会修改的内容：JS和CSS文件，图片，和任何类型的二进制文件都属于这个类目。</p>
+<p>永远，我确实说的是永远。为静态资源指定版本号是很通用的做法。它们无论什么时候改动了，它们的URL就改变了。</p>
+<p>这里是一些针对静态资源的简单的规则： </p>
+<ul>
+<li>在文件或者路径中嵌入指纹。避免为指纹使用查询字符串。另外，确保生成的URL长度超过8个不同的字符。 </li>
+<li>使用这些HTTP头： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Cache-Control: public, max-age=31536000</div><div class="line">Expires: (a year from now)</div><div class="line">ETag: (based on content)</div><div class="line">Last-Modified: (some time in the past)</div><div class="line">Vary: Accept-Encoding</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>针对静态资源的设置就是那么简单。 </p>
+<h3 id="动态资源"><a href="#动态资源" class="headerlink" title="动态资源"></a>动态资源</h3><p>针对应用程序私密性和新鲜度方面需求的不同，我们应该使用不同的缓存控制设置。 </p>
+<p>对于非私密性和经常性变动的资源（想像一下股票信息），我们应该使用下面这些：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Cache-Control: public, max-age=0</div><div class="line">Expires: (now)</div><div class="line">ETag: (based on content)</div><div class="line">Last-Modified: (some time in the past)</div><div class="line">Vary: Accept-Encoding</div></pre></td></tr></table></figure></p>
+<p>这些设置的效果是：这些资源可以被公开地（通过浏览器和代理服务器）缓存起来。每一次在浏览器使用这些资源之前，浏览器或者代理服务器会检查这些资源是否有更新的版本，如果有，就把它们下载下来。 </p>
+<p>这样的设置需要注意，浏览器在重新检查资源时效性方面有一定的灵活性。典型的是，当用户点击了“返回／前进”按钮时，浏览器不会重新检查这些资源文件，而是直接使用缓存的版本。你如果需要更严格的控制，需要告知浏览器即使当用户点击了“返回／前进”按钮，也需要重新检查这些资源文件，那么可以使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: public, no-cache, no-store</div></pre></td></tr></table></figure></p>
+<p>不是所有的动态资源都会马上变成过时的资源。如果它们可以保持至少5分钟的时效，可以使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: public, max-age=300</div></pre></td></tr></table></figure></p>
+<p>经过这样的设置，浏览器只会在5分钟之后才重新检查。在这之前，缓存的内容会被直接使用。如果在5分钟后，这些过时的内容需要严格控制，你可以添加”must-revalidate“字段：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: public, max-age=300, must-revalidate</div></pre></td></tr></table></figure></p>
+<p>对于私密或者针对用户的内容，需要把“public”替换为“private”以避免内容被代理缓存。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: private, …</div></pre></td></tr></table></figure></p>
+<h3 id="Cache-Control-和-Expires"><a href="#Cache-Control-和-Expires" class="headerlink" title="Cache-Control 和 Expires"></a>Cache-Control 和 Expires</h3><p>当同时使用“Cache-Control”和“Expires”时，“Cache-Control”获得优先权。 </p>
+<p>同时使用“Cache-Control”和“Expires”意味着得到更广泛的支持（被不同的浏览器和版本）。当然，它们两个应该被配置成相同的时效值，以避免引起困惑。 </p>
+<p>参考 <a href="http://squid-web-proxy-cache.1019090.n4.nabble.com/Expires-vs-Cache-Control-max-age-td1033350.html" target="_blank" rel="external">Expires: vs. Cache-Control: max-age</a>。 </p>
+<h3 id="ETag-和-Last-Modified"><a href="#ETag-和-Last-Modified" class="headerlink" title="ETag 和 Last-Modified"></a>ETag 和 Last-Modified</h3><p>这两个头在浏览器对资源做重新检查验证的时候会使用到。大致来说，浏览器只是盲目地存储这两个来自于服务器的头的值，然后在需要检查验证的时候，浏览器根据请求条件，把这两个指发送给服务器（分别通过“If-None-Match”和“If-Modified-Since”）。 </p>
+<p>注意只有在资源过期的情况下，检查验证才会发生。 </p>
+<p>在有条件的请求下，“If-None-Match”和“If-Modified-Since”头的出现取决于服务器。然而，由于是服务器生成的“ETag”和（或）“Last-Modified”，所以实际上，这没有什么大问题。大多数的浏览器在可能的情况下都会把着两者都发送给服务器。 </p>
+<p>参考 <a href="http://stackoverflow.com/questions/824152/what-takes-precedence-the-etag-or-last-modified-http-header" target="_blank" rel="external">What takes precedence: the ETag or Last-Modified HTTP header?</a>。 </p>
+<p>一个通常的建议是：避免使用“ETag”。这不是一个总是有用的建议。“ETag”在判断内容是否真的改动方面确实提供了更为精确的控制。针对生成的“ETag”，默认的Apache方法需要把文件的索引节（inode），大小（size）和最后修改时间作为输入求值得到。这会导致在负载均衡的环境中，生成的“ETag”值变得毫无用处，因为每个服务器都会针对相同的文件生成一个不同的“Etag”值。这个可能就是唯一的问题导致很多人完全禁用“ETag”，其实只要精确地针对一个匹配的文件生成一个独一无二的“ETag”值，就没有必要禁用“ETag”了。 </p>
+<p>参考 <a href="https://www.techpunch.co.uk/development/should-your-site-be-using-etags-or-not" target="_blank" rel="external">Should your site be using etags or not?</a>。</p>
+<h3 id="手动按下Ctrl-R"><a href="#手动按下Ctrl-R" class="headerlink" title="手动按下Ctrl-R"></a>手动按下Ctrl-R</h3><p>当按下Ctrl-R时，浏览器会携带下面的请求，以检查是否需要更新缓存内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Cache-Control: max-age=0</div><div class="line">If-None-Match: …</div><div class="line">If-Modifed-Since: …</div></pre></td></tr></table></figure></p>
+<p>注意这并不只是和原服务器建立连接，其同样适用于代理服务器。本质上，它只是重新检查验证内容。如果服务器回应了一个304，浏览器将会使用缓存的内容。 </p>
+<h3 id="Vary-ACcept-Encoding"><a href="#Vary-ACcept-Encoding" class="headerlink" title="Vary: ACcept-Encoding"></a>Vary: ACcept-Encoding</h3><p>这个头对于一些人来说可能比较陌生。 </p>
+<p>当一个资源启用了gzip压缩，并且被代理服务器缓存，客户端如果不支持gzip压缩，那么在这样的情况下将会得到不正确的数据（也就是，压缩过的数据）。这将会使代理服务器缓存两个版本的资源：一个是压缩过的，一个是没压缩过的。正确版本的资源将在请求头发送之后进行传输。 </p>
+<p>还有一个现实的原因：IE浏览器不缓存通过“Vary”头标记的任何资源和任何字段，除了“Accept-Encoding”和“User-Agent”。所以通过这种方式添加这个头，能确保这些资源在IE下被缓存。 </p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="https://devcenter.heroku.com/articles/increasing-application-performance-with-http-cache-headers" target="_blank" rel="external">Increasing Application Performance with HTTP Cache Headers</a> </li>
+<li><a href="http://tomayko.com/writings/things-caches-do" target="_blank" rel="external">Things Caches Do</a></li>
+<li><a href="https://developers.google.com/speed/articles/caching" target="_blank" rel="external">Google Developers: HTTP Caching</a></li>
+<li><a href="https://developers.google.com/speed/docs/best-practices/caching?csw=1" target="_blank" rel="external">Google Developers: Optimize Caching</a></li>
+<li><a href="http://www.mnot.net/cache_docs/" target="_blank" rel="external">Caching Tutorial for Web Authors and Webmasters</a></li>
+<li><a href="http://palizine.plynt.com/issues/2008Jul/cache-control-attributes/" target="_blank" rel="external">Cache Control Directives Demystified</a></li>
+<li><a href="http://webmasters.stackexchange.com/questions/1459/what-are-the-hard-and-fast-rules-for-cache-control?lq=1" target="_blank" rel="external">What are the hard and fast rules for Cache Control?</a></li>
+<li><a href="http://stackoverflow.com/questions/1046966/whats-the-difference-between-cache-control-max-age-0-and-no-cache" target="_blank" rel="external">What’s the difference between Cache-Control: max-age=0 and no-cache?</a></li>
+<li><a href="http://stackoverflow.com/questions/2932890/http-cache-control-max-age-must-revalidate" target="_blank" rel="external">HTTP Cache Control max-age, must-revalidate</a></li>
+<li><a href="http://stackoverflow.com/questions/18148884/difference-between-no-cache-and-must-revalidate?rq=1" target="_blank" rel="external">Difference between no-cache and must-revalidate</a></li>
+<li><a href="http://blogs.msdn.com/b/ie/archive/2010/07/14/caching-improvements-in-internet-explorer-9.aspx" target="_blank" rel="external">Caching Improvements in Internet Explorer 9</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有时，HTTP中的缓存可能会非常让人头疼。按照文档正确地使用HTTP并不是那么困难，但事实上，不同的浏览器和HTTP版本常常困扰着我们。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web开发" scheme="http://www.ruanjiawei.com/categories/Web%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Http" scheme="http://www.ruanjiawei.com/tags/Http/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>通过Babel使用ES6的import</title>
+    <link href="http://www.ruanjiawei.com/2016/09/22/es6-import/"/>
+    <id>http://www.ruanjiawei.com/2016/09/22/es6-import/</id>
+    <published>2016-09-22T07:28:59.000Z</published>
+    <updated>2016-09-28T02:59:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在<a href="http://www.pauleveritt.org/articles/pylyglot/modules/" target="_blank" rel="external">《Modules with CommonJS》</a>一文中，我们看到了通过类似于Python的import，在模块中组织我们的代码。那篇文章展示了NodeJS的本地模块系统–CommonJS。同时，我们还阐述了在不支持模块和模块加载器的浏览器中，如何使用Webpack去解决这种兼容性问题。 </p>
+<a id="more"></a>
+<p>在本文中，我们将会看到一个不同的import系统，这个系统是基于最新标准的JavaScript而生的。我们将会使用ES6的import，然后通过<a href="http://babeljs.io" target="_blank" rel="external">Babel转换器</a>将我们的代码转换成在Node和浏览器环境都可以运行的兼容性代码。 </p>
+<p><strong><em>注：</em></strong><br>为什么说“ES6”而不是“ES2015”？诚然，“ES6”作为一个标签正逐渐被遗忘，因为现在相关委员会已经通过基于时间的命名方案，而不是通过版本数字的方式去管理那些规范。但事实证明，模块和加载器是一个多层次的复杂的业务，包含着后期会推出的不同方面的东西。所以，我们将会使用“ES6模块”以避免一些细节。  </p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>安装和配置Babel</li>
+<li>将CommonJS中的模块和import切换到ES6</li>
+<li>把Babel插入到前端工具链（Mocha，Webpack，ESLint）中 </li>
+</ul>
+<h3 id="起点"><a href="#起点" class="headerlink" title="起点"></a>起点</h3><p>我们需要通过一些前期的文章<sup>注1</sup>获得一些代码片段作为起点，生成本文的代码： </p>
+<ul>
+<li>部分webpack，部分ESLint，部分Mocha</li>
+<li>确保ESLint在PyCharm中的连接</li>
+<li>npm start 和 npm test，加上Mocha test运行器</li>
+</ul>
+<p>我们的index.html文件非常简单，其来源于Webpack相关的文章：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>ES6 Imports<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Incrementer<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Webpack的配置也是一样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    entry: <span class="string">'./app.js'</span>,</div><div class="line">    output: &#123;</div><div class="line">        path: __dirname,</div><div class="line">        filename: <span class="string">'bundle.js'</span></div><div class="line">    &#125;,</div><div class="line">    devtool: <span class="string">'source-map'</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>经过这些步骤，Webpack将会把下面的app1.js和lib1.js打包，通过webpack-dev-server提供服务：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> incrementer = <span class="built_in">require</span>(<span class="string">'./lib1'</span>);</div><div class="line"><span class="keyword">var</span> newVal = incrementer(<span class="number">3</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'newVal'</span>, newVal);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">incrementer</span> (<span class="params">i</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> i+<span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = incrementer;</div></pre></td></tr></table></figure>
+<p>最后，我们从之前的文章中获取一份Mocha测试文件： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> describe = <span class="built_in">require</span>(<span class="string">'mocha'</span>).describe,</div><div class="line">    it = <span class="built_in">require</span>(<span class="string">'mocha'</span>).it,</div><div class="line">    expect = <span class="built_in">require</span>(<span class="string">'chai'</span>).expect,</div><div class="line">    incrementer = <span class="built_in">require</span>(<span class="string">'./lib1'</span>);</div><div class="line"></div><div class="line">describe(<span class="string">'Hello World'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    it(<span class="string">'should increment a value'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> result = incrementer(<span class="number">8</span>);</div><div class="line">        expect(result).eql(<span class="number">9</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>让我们安装Babel–一个现代的JavaScript转换器，通过一个“loader”在Webpack打包的时候进行编译转换：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install --save-dev babel-preset-es2015 babel-loader</div></pre></td></tr></table></figure></p>
+<p>这一步将会在我们的package.json文件的devDependencies中添加依赖：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"name"</span>: <span class="string">"pylyglot"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,</div><div class="line">  <span class="string">"description"</span>: <span class="string">"Series of articles for Polyglot Python with PyCharm"</span>,</div><div class="line">  <span class="string">"main"</span>: <span class="string">"index.js"</span>,</div><div class="line">  <span class="string">"scripts"</span>: &#123;</div><div class="line">    <span class="string">"start"</span>: <span class="string">"webpack-dev-server"</span>,</div><div class="line">    <span class="string">"test"</span>: <span class="string">"mocha --compilers js:babel-core/register test*.js"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="string">"repository"</span>: &#123;</div><div class="line">    <span class="string">"type"</span>: <span class="string">"git"</span>,</div><div class="line">    <span class="string">"url"</span>: <span class="string">"git+ssh://git@github.com/pauleveritt/pauleveritt.github.io.git"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="string">"author"</span>: <span class="string">"Paul Everitt"</span>,</div><div class="line">  <span class="string">"license"</span>: <span class="string">"ISC"</span>,</div><div class="line">  <span class="string">"bugs"</span>: &#123;</div><div class="line">    <span class="string">"url"</span>: <span class="string">"https://github.com/pauleveritt/pauleveritt.github.io/issues"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="string">"homepage"</span>: <span class="string">"https://github.com/pauleveritt/pauleveritt.github.io#readme"</span>,</div><div class="line">  <span class="string">"devDependencies"</span>: &#123;</div><div class="line">    <span class="string">"babel-loader"</span>: <span class="string">"^6.2.1"</span>,</div><div class="line">    <span class="string">"babel-preset-es2015"</span>: <span class="string">"^6.3.13"</span>,</div><div class="line">    <span class="string">"chai"</span>: <span class="string">"^3.4.1"</span>,</div><div class="line">    <span class="string">"eslint"</span>: <span class="string">"^1.10.3"</span>,</div><div class="line">    <span class="string">"mocha"</span>: <span class="string">"^2.3.4"</span>,</div><div class="line">    <span class="string">"webpack"</span>: <span class="string">"^1.12.12"</span>,</div><div class="line">    <span class="string">"webpack-dev-server"</span>: <span class="string">"^1.14.1"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="ES6模块"><a href="#ES6模块" class="headerlink" title="ES6模块"></a>ES6模块</h3><p>让我们把基于CommonJS的模块和导入，转换为基于ES6的模块。首先，我们创建一个app2.js文件，其使用了 不一样的import语法： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> incrementer <span class="keyword">from</span> <span class="string">'./lib2'</span>;</div><div class="line"><span class="keyword">var</span> newVal = incrementer(<span class="number">3</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'newVal'</span>, newVal);</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"></div><div class="line">当我们这样做的时候，PyCharm马上就会崩溃。它目前只支持“ECMAScript5.1”标准作为JavaScript的语法。我们现在给了它无效的语法，因此我们需要在“Preferences -&gt; Languages &amp; Frameworks -&gt; JavaScript -&gt; JavaScript language version”中，更改其为“ECMAScript 6”。  </div><div class="line"></div><div class="line">这时候，ESLint也会失效--它必须要认识这些新的语法。幸运的是，ESLint和Babel一样，都是非常流行和快速更新换代的开源项目。它们很容易就能和ES2015、ES2016和ES2017协同工作。让我们更新我们的 .eslintrc 文件： </div><div class="line"></div><div class="line">`<span class="string">``</span>javascript</div><div class="line">&#123;</div><div class="line">  <span class="string">"rules"</span>: &#123;</div><div class="line">    <span class="string">"strict"</span>: <span class="number">0</span>,</div><div class="line">    <span class="string">"quotes"</span>: [</div><div class="line">      <span class="number">1</span>,</div><div class="line">      <span class="string">"single"</span></div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  <span class="string">"ecmaFeatures"</span>: &#123;</div><div class="line">    <span class="string">"modules"</span>: <span class="literal">true</span></div><div class="line">  &#125;,</div><div class="line">  <span class="string">"env"</span>: &#123;</div><div class="line">    <span class="string">"browser"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="string">"jquery"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="string">"es6"</span>: <span class="literal">true</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>让我们现在新建一个lib2.js文件，其将使用ES6的export语法导出我们的函数： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">incrementer</span> (<span class="params">i</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> i+<span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在这种条件下，此模块中除了该函数，没有任何可以导入的东西。因为它是一个不一样的，不兼容的语法；我们可以避免繁琐的module.exports，而直接在声明中使用export default。</p>
+<p>在导出语法中使用default，意味着我们的意思是把这个函数是这个模块唯一导出的东西。事实上，你还可以像这样导出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export default function (i) &#123;</div></pre></td></tr></table></figure></p>
+<p>这就是匿名函数的导出方式。通过默认的export，这个函数的名字来源于导入这个函数的模块，而不是导出这个函数的模块。  </p>
+<p>我们现在得到了通过ES6进行导入和导出的模块。为了查看它在Node中是否能正常工作，我们可以在我们的测试中使用ES6的import来检验： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; describe, before, it &#125; <span class="keyword">from</span> <span class="string">'mocha'</span>;</div><div class="line"><span class="keyword">import</span> &#123;expect&#125; <span class="keyword">from</span> <span class="string">'chai'</span>;</div><div class="line"><span class="keyword">import</span> incrementer <span class="keyword">from</span> <span class="string">'./lib2'</span>;</div><div class="line"></div><div class="line">describe(<span class="string">'Hello World'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    it(<span class="string">'should increment a value'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> result = incrementer(<span class="number">8</span>);</div><div class="line">        expect(result).eql(<span class="number">9</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>让我们跑一个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm run test2.js</div></pre></td></tr></table></figure></p>
+<p>汗，报错了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SyntaxError: Unexpected token import</div></pre></td></tr></table></figure></p>
+<p>这好像是Mocha–一个Node应用，不能解析我们的JavaScript。好吧，没开玩笑……它现在使用ES6编写的。我们需要一些东西转把未来的JavaScript（ES6模块）转换成现在的JavaScript（Node）。 </p>
+<h3 id="通过Babel编译"><a href="#通过Babel编译" class="headerlink" title="通过Babel编译"></a>通过Babel编译</h3><p>这种转换称为“编译(transpiling)”<sup>注2</sup>，而Babel是使用人数最多的编译工具。我们在<br><a href="http://www.pauleveritt.org/articles/pylyglot/pythonic_js/" target="_blank" rel="external">Pythonic JavaScript with ES2015</a><br>中谈论了更多关于编译方面的东西。 </p>
+<p>我们需要告诉Mocha以运行我们的JavaScript–包括我们同样需要以另一种风格–通过Babel，来编写的应用代码和测试。首先，Babel有一个配置，因为诚然，所有其他有趣的东西都有一个这样的东西： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这一步是为Babel本身做配置。为了告知我们的PyCharm Mocha运行配置以使用Babel，我们需要编辑运行配置，在额外的Mocha选项（Extra Mocha options）中添加这个： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--compilers js:babel-core/register</div></pre></td></tr></table></figure>
+<p>我们的Mocha测试现在就能正常运行了。这也意味着我们的lib2.js也能跑起来了。为了能在npm run脚本下处理这些变更，我们需要修改package.json： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;test&quot;: &quot;mocha --compilers js:babel-core/register test*.js&quot;</div></pre></td></tr></table></figure>
+<p>这一步适用于Node。那浏览器下呢？我们需要像Mocha那样，告知Webpack在打包的时候使用Babel编译代码吗？是的，并且这个非常简单： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    entry: <span class="string">'./app2.js'</span>,</div><div class="line">    output: &#123;</div><div class="line">        path: __dirname,</div><div class="line">        filename: <span class="string">'bundle.js'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="built_in">module</span>: &#123;</div><div class="line">        loaders: [</div><div class="line">            &#123;</div><div class="line">                test: <span class="regexp">/\.js$/</span>,</div><div class="line">                loader: <span class="string">'babel-loader'</span></div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;,</div><div class="line">    devtool: <span class="string">'source-map'</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>我们为所有的.js后缀的文件都添加了一个module项，并且定义了一个loader。这个loader通过babel-loader软件运行这些文件，而这个软件是一个Babel在Webpack下的插件。babel-loader使用的是在.babelrc文件下共享的设置，这可以避免Babel在Mocha和Webpack下的独立设置。 </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>我们现在只是使用到了ES6中很小一部分的特性：模块和导入。为了使用这部分特性，我们需要引入一个新的工具–Babel到前端工具链中，并处理由此带来的连锁效应： </p>
+<ul>
+<li>PyCharm -&gt; ECMAScript 6 </li>
+<li>ESLint</li>
+<li>Mocha</li>
+<li>Webpack </li>
+</ul>
+<p>在你编程的时候，你的CPU诚然会一直处于繁忙的状态，因为它要一直编译和打包。有办法解决这个问题，但是现在，相信我……这很值得，因为在下一遍文章中就会明白了~  </p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><blockquote>
+<p>相关的文章请参考<a href="http://www.pauleveritt.org/articles/pylyglot/" target="_blank" rel="external">Paul Everitt’s blog</a><br><a href="http://blog.csdn.net/napolunyishi/article/details/20473799" target="_blank" rel="external">Compiling和Transpiling的区别</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在&lt;a href=&quot;http://www.pauleveritt.org/articles/pylyglot/modules/&quot;&gt;《Modules with CommonJS》&lt;/a&gt;一文中，我们看到了通过类似于Python的import，在模块中组织我们的代码。那篇文章展示了NodeJS的本地模块系统–CommonJS。同时，我们还阐述了在不支持模块和模块加载器的浏览器中，如何使用Webpack去解决这种兼容性问题。 &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web开发" scheme="http://www.ruanjiawei.com/categories/Web%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="ES6" scheme="http://www.ruanjiawei.com/tags/ES6/"/>
+    
+      <category term="Babel" scheme="http://www.ruanjiawei.com/tags/Babel/"/>
+    
+  </entry>
+  
+  <entry>
     <title>花地河边上最后的晚餐</title>
     <link href="http://www.ruanjiawei.com/2016/09/09/before-leaving-vip/"/>
     <id>http://www.ruanjiawei.com/2016/09/09/before-leaving-vip/</id>
     <published>2016-09-09T15:14:23.000Z</published>
-    <updated>2016-09-09T17:06:09.000Z</updated>
+    <updated>2016-09-09T17:46:09.000Z</updated>
     
     <content type="html"><![CDATA[<p>更新了博客的关于页面的个人履历，脑海里回放着这一年里发生的点点滴滴，忍不住要动手码几下，Mark一下最近发生的事情。   </p>
-<p>在荷香居和前项目组的同事们吃完最后一顿饭，意味着我即将离开这个陪伴了我将近一年的公司，跟这些可爱的同事们做最后的告别。也许未来我还会经常回芳村找这些可爱的人，但是那时，我将是以朋友的身份出线，而不会再是同事。 </p>
+<p>在荷香居和前项目组的同事们吃完最后一顿饭，意味着我即将离开这个陪伴了我将近一年的公司，跟这些可爱的同事们做最后的告别。也许未来我还会经常回芳村找这些可爱的人，但是那时，我将是以朋友的身份出现，而不会再是同事。 </p>
 <p>离别总是伤感的，好在这个结果给了我一个多月的时间去适应，以至于在今晚还能故作淡定地在饭局中谈笑风生。在这一个多月里，有过无数的挣扎，前期主要是为了留下，到中期是对vip的失望，以至到最后执意要离开。</p>
 <p>七月底从阳江回到广州之后，大家都得面对新出路的问题。记得七月下旬的时候，Cindy跟我说，要给我在运营中心换一个NB的岗位。我说我现在很好啊，为什么要换呢，虽然运营中心确实比我们项目组NB，但我干得开心啊。再者，那时候老大还埋了一个好消息，大概是我们的项目组要腾飞了，因为有特卖会给我们做推广。呵呵，讽刺，几天后，我们接到消息说我们的项目组要被关停了。</p>
 <p>Cindy过来调侃我，大意是“你看吧，傻逼了吧，现在你还是得来运营中心，我罩你“。但事实是，后来，很多事情完全不按照常理出牌，Cindy也罩不住我了。  </p>
@@ -56,8 +220,10 @@
     
     </summary>
     
+      <category term="躁动的心" scheme="http://www.ruanjiawei.com/categories/%E8%BA%81%E5%8A%A8%E7%9A%84%E5%BF%83/"/>
     
-      <category term="躁动的心" scheme="http://www.ruanjiawei.com/tags/%E8%BA%81%E5%8A%A8%E7%9A%84%E5%BF%83/"/>
+    
+      <category term="mood" scheme="http://www.ruanjiawei.com/tags/mood/"/>
     
   </entry>
   
