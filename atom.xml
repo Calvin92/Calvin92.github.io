@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.ruanjiawei.com/"/>
-  <updated>2017-02-11T12:04:35.000Z</updated>
+  <updated>2017-02-12T05:33:20.000Z</updated>
   <id>http://www.ruanjiawei.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.ruanjiawei.com/2017/02/11/react-native-image-placeholder/"/>
     <id>http://www.ruanjiawei.com/2017/02/11/react-native-image-placeholder/</id>
     <published>2017-02-11T12:50:45.000Z</published>
-    <updated>2017-02-11T12:04:35.000Z</updated>
+    <updated>2017-02-12T05:33:20.000Z</updated>
     
     <content type="html"><![CDATA[<p>用React-Native开发进入一定境界之后，越发觉得用RN来开发基于安卓平台的应用就是个大坑，因为好像官方根本就不怎么关心安卓平台的开发体验。</p>
 <p>说说最近比较恶心RN官方的原因。最近为了提高用户体验，打算给图片加一个placeholder，当用户加载图片失败后，给一个替代的默认图片用以展示给用户。但是当你浏览官方的文档后，你会发现，这个功能在iOS下给 <code>Image</code> 组件提供了一个叫 <code>defaultSource</code> 的属性，用以实现我们想要的功能。然而，这个属性是用标记了 <code>iOS</code> 的，也就是说，这个属性只支持iOS平台。</p>
@@ -117,6 +117,49 @@
     
     
       <category term="死宅" scheme="http://www.ruanjiawei.com/tags/%E6%AD%BB%E5%AE%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何实现一个基于Vue2.0插件</title>
+    <link href="http://www.ruanjiawei.com/2016/12/18/how-to-implement-a-vue2-plugin/"/>
+    <id>http://www.ruanjiawei.com/2016/12/18/how-to-implement-a-vue2-plugin/</id>
+    <published>2016-12-18T11:08:15.000Z</published>
+    <updated>2017-02-12T09:26:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在做<a href="https://app.aotu.io" target="_blank" rel="external">「轻氧」</a> 的Web版本。项目的技术栈主要使用了Express + MongoDB(leancloud)作为后端，Vue2.0 + Vuex + SSR作为前端选型。</p>
+<p>项目目前已经到了开发的后期预测试阶段，在交给老大确认需要修改的细节的时候，老大希望仅有的几个alert采用自定义组件的实现方式。</p>
+<p>实现这个需求其实有很多种方法：</p>
+<p>一种是在 <code>utilities</code> 通用helper函数中定义一个操作DOM的函数，然后在需要alert的时候把执行这个函数，把DOM插入到根节点中。这种方法可行，但是不够优雅，另外，如果众多模块中使用到这个工具函数，你需要在每个需要用到的模块中手动地 <code>import</code> 一遍。</p>
+<p>另一种是，将其实现为一个组件，通过在Vuex的state中定义一个 <code>flag</code> ，控制其为 <code>true</code> 或者 <code>false</code> 来控制其显示或者隐藏。这种实现方式最大的不好之处在于，这个组件必须在根容器中显式地写上，并且，这个ui的控制不应该污染Vuex的数据，而Vuex中的数据应该是项目共享的数据。所以，这种实现方式，最不值得推荐。 </p>
+<p>最后一种就是使用Vue插件的实现方式。插件是为Vue添加全局功能的实现方式，按照官方的文档，插件的实现方式主要有以下几种：</p>
+<ol>
+<li>添加全局方法或者属性，如: vue-element</li>
+<li>添加全局资源：指令/过滤器/过渡等，如 vue-touch</li>
+<li>通过全局 mixin方法添加一些组件选项，如: vuex</li>
+<li>添加 Vue 实例方法，通过把它们添加到 Vue.prototype 上实现</li>
+<li>一个库，提供自己的 API，同时提供上面提到的一个或多个功能，如 vue-router</li>
+</ol>
+<p>我们可以使用第四种方法去实现 <code>Toast</code> 这个功能。Vue的插件有一个公开方法 <code>install</code> ，这个方法的第一个参数是 Vue 构造器 , 第二个参数是一个可选的选项对象: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">MyPlugin.install = <span class="function"><span class="keyword">function</span> (<span class="params">Vue, options</span>) </span>&#123;</div><div class="line">  <span class="comment">// 添加实例方法</span></div><div class="line">  Vue.prototype.$myMethod = <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</div><div class="line">    <span class="comment">// 逻辑...</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过这种方法，我们可以简单地把 <code>Toast</code> 功能插件按如下实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// toast.js</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">install</span>: <span class="function"><span class="keyword">function</span>(<span class="params">Vue, options</span>) </span>&#123;</div><div class="line">    Vue.prototype.$toast = <span class="function"><span class="keyword">function</span>(<span class="params">text = <span class="string">"默认的提示信息"</span>, options = &#123;type: <span class="string">'error'</span>&#125;</span>) </span>&#123;</div><div class="line">      <span class="comment">// console.log(this.$root.$el.className)</span></div><div class="line">      <span class="keyword">let</span> bgColor  = <span class="string">'#bd362f'</span></div><div class="line">      <span class="keyword">let</span> iconType = <span class="string">'fa-exclamation-circle'</span></div><div class="line"></div><div class="line">      <span class="keyword">if</span>(options.type === <span class="string">'success'</span>) &#123;</div><div class="line">        iconType = <span class="string">'fa-check'</span></div><div class="line">        bgColor  = <span class="string">'#51a351'</span></div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">const</span> styleForOuter = <span class="string">'position: fixed;display: flex;top: 0;left: 0;'</span> + </div><div class="line">        <span class="string">'width: 100%;height: 100%;justify-content: center;align-items: center;z-index: 9999'</span></div><div class="line">      <span class="keyword">const</span> styleForInner = <span class="string">`background: <span class="subst">$&#123;bgColor&#125;</span>; max-width: 250px; display: flex; padding: 20px; position: relative; overflow: hidden; border-radius: 5px; opacity: 1; transition: opacity .5s linear`</span></div><div class="line"></div><div class="line">      <span class="keyword">const</span> htmlForInner = <span class="string">`</span></div><div class="line">        &lt;div style="width: 30px"&gt;&lt;i class="fa <span class="subst">$&#123;iconType&#125;</span>" style="color: #ffffff; font-size: 20px"&gt;&lt;/i&gt;&lt;/div&gt;</div><div class="line">	      &lt;div style="flex: 1; color: #ffffff"&gt;<span class="subst">$&#123;text&#125;</span>&lt;/div&gt;</div><div class="line">			`</div><div class="line"></div><div class="line">      <span class="keyword">let</span> outerDiv = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>)</div><div class="line">      outerDiv.style = styleForOuter</div><div class="line">      <span class="keyword">let</span> innerDiv = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>)</div><div class="line">      innerDiv.style = styleForInner</div><div class="line">      innerDiv.innerHTML = htmlForInner</div><div class="line"></div><div class="line">      outerDiv.appendChild(innerDiv)</div><div class="line"></div><div class="line">      <span class="keyword">this</span>.$root.$el.appendChild(outerDiv)</div><div class="line">	</div><div class="line">      <span class="comment">// toast停留时间 500ms为opacity动画时间</span></div><div class="line">      setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;innerDiv.style.opacity = <span class="number">0</span>&#125;, <span class="number">1000</span>)</div><div class="line">      setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="keyword">this</span>.$root.$el.removeChild(outerDiv)&#125;, <span class="number">1500</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在全局中，注册这个插件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// app.js</div><div class="line">Vue.use(Toast)</div></pre></td></tr></table></figure>
+<p>在任何想要使用 <code>toast</code> 的组件中，只需要简单地按如下使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">this.$toast(&apos;想要显示的消息&apos;, options)</div></pre></td></tr></table></figure></p>
+<p>整个Vue插件的实现过程，就是如上几步，非常简单，而且优雅。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在做&lt;a href=&quot;https://app.aotu.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;「轻氧」&lt;/a&gt; 的Web版本。项目的技术栈主要使用了Express + MongoDB(leancloud)作为后端，Vue2.0 + Vue
+    
+    </summary>
+    
+      <category term="Web开发" scheme="http://www.ruanjiawei.com/categories/Web%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Vue" scheme="http://www.ruanjiawei.com/tags/Vue/"/>
     
   </entry>
   
