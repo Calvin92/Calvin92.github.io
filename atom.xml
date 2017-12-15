@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.ruanjiawei.com/"/>
-  <updated>2017-02-12T05:33:20.000Z</updated>
+  <updated>2017-12-15T10:15:21.000Z</updated>
   <id>http://www.ruanjiawei.com/</id>
   
   <author>
@@ -14,6 +14,72 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ie9对CSS的一些限制</title>
+    <link href="http://www.ruanjiawei.com/2017/10/09/ie9-stylesheet-limits/"/>
+    <id>http://www.ruanjiawei.com/2017/10/09/ie9-stylesheet-limits/</id>
+    <published>2017-10-09T12:53:27.000Z</published>
+    <updated>2017-12-15T10:15:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>前段时间为了提高对用户的用户度，将项目简单适配一下IE9（项目：<a href="https://ling.jd.com，对标阿里鲁班系统）。" target="_blank" rel="external">https://ling.jd.com，对标阿里鲁班系统）。</a></p>
+<p>不踩不知道，一踩，跳进坑里，小半天才走出来。</p>
+<p>将项目在IE9下跑起来后（听起来好像费了点周折，是的，mac用户的痛点），发现有部分样式都没有生效。当时检查了几遍元素，结构是没问题的，控制台（略原始）上就是有部分已经写在样式文件里的样式没有生效。好吧，借助fiddler（没错，我搞了台pc）代理了一份本地css文件，然后对这个css文件删啊删，发现删了大约5000行后，界面才有变化（删5000以下跟没删一样）。</p>
+<p>折腾了好一阵，加以查找资料，发现IE9下还有这样的一些规则（之前从未听说）：</p>
+<pre><code>- A sheet may contain up to 4095 rules
+- A sheet may @import up to 31 sheets
+-    @import nesting supports up to 4 levels deep
+</code></pre><p>就是以上的第一条规则导致上面问题的发生：因为IE9下单个文件最多只支持4095条规则，也就是说，超过4095条规则的样式代码统统都不会生效。</p>
+<p>另外两个规则表明：</p>
+<pre><code>- 单个样式文件只能`@import`31个外部样式文件。
+- `@import`只能嵌套四层。
+</code></pre><p>结合上面的规则，我们打包css文件，如果需要兼容IE9以下的浏览器，就需要考虑拆分了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前段时间为了提高对用户的用户度，将项目简单适配一下IE9（项目：&lt;a href=&quot;https://ling.jd.com，对标阿里鲁班系统）。&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://ling.jd.com，对标阿里鲁班系统）。&lt;/a
+    
+    </summary>
+    
+      <category term="Web开发" scheme="http://www.ruanjiawei.com/categories/Web%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="web" scheme="http://www.ruanjiawei.com/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React的input中文输入下的onChange</title>
+    <link href="http://www.ruanjiawei.com/2017/08/11/react-chinese-onchange/"/>
+    <id>http://www.ruanjiawei.com/2017/08/11/react-chinese-onchange/</id>
+    <published>2017-08-10T16:00:00.000Z</published>
+    <updated>2017-12-15T09:40:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题根源"><a href="#问题根源" class="headerlink" title="问题根源"></a>问题根源</h2><p>打开百度首页，简单的一个搜索框，在其中输入一些东西，接口就会去请求server预拉取一些相关的关键词，列于输入框下供你选择。</p>
+<p>以上的效果实现起来很容易，设想如果我们使用<code>React</code>实现，熟悉<code>React</code>的你是否已经想到了只需简单监听<code>input</code>的<code>onChange</code>事件，一旦监听到输入更改就执行一次api查询即可？理论上是的，事实上也确实可以做到，只是当你留意一下，你会发现如果我们输入<code>开车上纽北</code>这几个中文时，你多了很多次完全不正确的查询：比如发送了关键词：<code>k</code>，<code>kaiche</code>，<code>kaichesha</code>等等。</p>
+<p>这完全不是我们想要的效果：我们期望的是，如果我们在输入中文，应该等待我们输完一个正确的中文后，再发送相关的请求。</p>
+<p>你可能很疑惑，问题发生在哪里？原生的<code>input</code>不是这样的～</p>
+<p>是的，如果你了解<code>React</code>，你已经猜到了这是<code>React</code>自身的合成事件的锅–它用的是自己的那套“非标准的”事件。</p>
+<h2 id="怎么解决"><a href="#怎么解决" class="headerlink" title="怎么解决"></a>怎么解决</h2><p>首先，使用非受控组件。所谓的非受控组件，对于<code>input</code>，简单来说，就是不要设置value。</p>
+<p>其次，需要使用到几个官方自带的<code>input</code>辅助事件：onCompositionStart／onCompositionUpdate／onCompositionEnd。</p>
+<p>多说无益，上代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;input</div><div class="line">  onCompositionStart=&#123;() =&gt; &#123;</div><div class="line">    <span class="keyword">this</span>.compositionStatus = <span class="string">'start'</span></div><div class="line">  &#125;&#125;</div><div class="line">  onCompositionEnd=&#123;(e) =&gt; &#123;</div><div class="line">    <span class="keyword">this</span>.compositionStatus = <span class="string">'end'</span></div><div class="line">    <span class="comment">// setState</span></div><div class="line">  &#125;&#125;</div><div class="line">  onChange=&#123;(e) =&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.compositionStatus === <span class="string">'end'</span>) &#123;</div><div class="line">      <span class="comment">// setState and do something else</span></div><div class="line">    &#125;</div><div class="line">  &#125;&#125;</div><div class="line">/&gt;</div></pre></td></tr></table></figure>
+<p>完整的demo可以参考codepen：<a href="https://codepen.io/Calvin92/pen/Eojraa" target="_blank" rel="external">React的input触发多次的解决方案</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;React自身实现的一套合成事件系统，在某些情况下会导致跟原生事件存在差异，而input的`onChange`就是其中之一。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web开发" scheme="http://www.ruanjiawei.com/categories/Web%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="React" scheme="http://www.ruanjiawei.com/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title>React-Native安卓中实现图片的placeholder</title>
@@ -50,7 +116,7 @@
     <link href="http://www.ruanjiawei.com/2017/02/08/react-native-issues/"/>
     <id>http://www.ruanjiawei.com/2017/02/08/react-native-issues/</id>
     <published>2017-02-08T12:50:45.000Z</published>
-    <updated>2017-02-09T14:43:00.000Z</updated>
+    <updated>2017-02-24T12:12:46.000Z</updated>
     
     <content type="html"><![CDATA[<p>任何一项通往成熟道路上的技术都遍布着各种各样的坑，而这些坑，需要广大的过客去踩，去填，才有可能最终走向成熟，否则就是胎死腹中。 </p>
 <p>React-Native的安卓版本已经发布一年多了，但是相比起iOS版本，真是嫩多了，换句话就是，太特么多坑了～</p>
@@ -63,10 +129,13 @@
 <h3 id="componentDidMount中不能操作ScrollView实例"><a href="#componentDidMount中不能操作ScrollView实例" class="headerlink" title="componentDidMount中不能操作ScrollView实例"></a>componentDidMount中不能操作ScrollView实例</h3><p>当你像我这样，打算在componentDidMount中对ScrollView进行操作时：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">componentDidMount() &#123;</div><div class="line">  <span class="keyword">this</span>._scrollView.scrollTo(&#123;<span class="attr">y</span>: <span class="number">0</span>, <span class="attr">x</span>: <span class="keyword">this</span>.currentOffsetX, <span class="attr">animated</span>: <span class="literal">true</span>&#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">render() &#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;Animated.View style=&#123;&#123;height: 140, marginTop: this.state.shrink&#125;&#125;&gt;</div><div class="line">      &lt;Image</div><div class="line">        source=&#123;&#123;uri: this.props.channel.images[0].url&#125;&#125;</div><div class="line">        style=&#123;styles.backgroundImage&#125;</div><div class="line">      /&gt;</div><div class="line">      &lt;ScrollView</div><div class="line">        ref=&#123;scrollView =&gt; &#123; this._scrollView = scrollView &#125;&#125; // 注意这里就行</div><div class="line">        horizontal=&#123;true&#125;</div><div class="line">        scrollEnabled=&#123;false&#125;</div><div class="line">        showsHorizontalScrollIndicator=&#123;false&#125;</div><div class="line">        scrollsToTop=&#123;false&#125;</div><div class="line">        style=&#123;styles.mt70&#125;&gt;</div><div class="line">        &lt;View style=&#123;styles.channelsTabView&#125;&gt;</div><div class="line">          &#123;channelItems&#125;</div><div class="line">        &lt;/View&gt;</div><div class="line">      &lt;/ScrollView&gt;</div><div class="line">    &lt;/Animated.View&gt;</div><div class="line">  )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>我可以很负责任地告诉你，这样行不通。因为在安卓中，因为有动画，你在componentDidMount中是拿不到 <code>this._scrollView</code> 的，也就是其为 <code>undefined</code> 或者是你在构造函数中设置的初始值。解决这个可以使用 <code>InteractionManager.runAfterInteractions</code> 配合setTimeout来解决，但这个不是很好的解决办法，后续如果我找到更好的解决方案，会更新给大家。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">InteractionManager.runAfterInteractions(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">this</span>._scrollView &amp;&amp; <span class="keyword">this</span>._scrollView.scrollTo(&#123;<span class="attr">y</span>: <span class="number">0</span>, <span class="attr">x</span>: <span class="keyword">this</span>.currentOffsetX, <span class="attr">animated</span>: <span class="literal">true</span>&#125;)</div><div class="line">  &#125;, <span class="number">60</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="WebView在source中设置了baseUrl后无法渲染"><a href="#WebView在source中设置了baseUrl后无法渲染" class="headerlink" title="WebView在source中设置了baseUrl后无法渲染"></a>WebView在source中设置了baseUrl后无法渲染</h3><p>具体是：当你在使用<code>安卓4.3</code>或者以下的系统测试时，你会发现当你使用了<code>baseUrl</code>，WebView中显示的全是<code>html</code>源码！也就是根本没有解析。</p>
+<p>这个问题是安卓原生的<code>WebView</code>存在bug。这时候唯一的办法就是做一下Hack。现在<code>安卓4.3</code>以下版本的机器也不多，所以建议就是使用类似<code>react-native-device-info</code>这样的库，然后获取安卓的版本号，对于<code>安卓4.3</code>以下的版本不进行设置<code>baseUrl</code>，其他的按你所愿去设置就OK。</p>
 <h3 id="WebView嵌套在View中时，无法显示"><a href="#WebView嵌套在View中时，无法显示" class="headerlink" title="WebView嵌套在View中时，无法显示"></a>WebView嵌套在View中时，无法显示</h3><p>这个问题出现在，当你的WebView不是出现在一个场景(scene)中的最顶层，而是嵌套在View或者其他类似的组件中的时候，你会发现这个WebView完全没有显示出来。这是因为你必须显式地给WebView设置一个高度，否则它不知道怎么layout(布局)。</p>
 <p>解决这个问题不难，给这个WebView的style设置 <code>{flex: 1}</code> 即可。</p>
 <h3 id="大量图片的ListView会在加载一部份row后，图片不再显示"><a href="#大量图片的ListView会在加载一部份row后，图片不再显示" class="headerlink" title="大量图片的ListView会在加载一部份row后，图片不再显示"></a>大量图片的ListView会在加载一部份row后，图片不再显示</h3><p>对于这个问题，我先贴一个地址：<a href="https://github.com/facebook/react-native/issues/8677" target="_blank" rel="external">传送门</a></p>
-<p>稍晚点我会对这个问题进行更新～</p>
+<p>其实，这个问题在<code>github</code>上已经有很多讨论了，大多都是关于内部实现的修改方案，但是我们在做业务的时候，比较急切的是尽快能让图片显示出来，而不是追究内部如何改善。网上对于这个问题普遍没有答案，但是，有一个比较有意思的解决办法：<code>&lt;Image&gt;</code>中嵌套一个组件作为<code>placeholder</code>即可解决。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 类似于web中img标签的alt</div><div class="line">&lt;Image source=&#123;&#123;uri: xxx&#125;&#125;&gt;</div><div class="line">  &lt;Text&gt;some text&lt;/Text&gt;</div><div class="line">&lt;/Image&gt;</div><div class="line"></div><div class="line">// 或者</div><div class="line">&lt;Image source=&#123;imageSource&#125; style=&#123;stylesForImage&#125;&gt;</div><div class="line">  &lt;Image source=&#123;placeholderImageSource&#125; style=&#123;[stylesForImage, &#123;zIndex: -1&#125;]&#125; /&gt; </div><div class="line">&lt;/Image&gt;</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
@@ -117,6 +186,46 @@
     
     
       <category term="死宅" scheme="http://www.ruanjiawei.com/tags/%E6%AD%BB%E5%AE%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES2016的最新特性</title>
+    <link href="http://www.ruanjiawei.com/2016/12/25/es2016-features/"/>
+    <id>http://www.ruanjiawei.com/2016/12/25/es2016-features/</id>
+    <published>2016-12-25T12:53:27.000Z</published>
+    <updated>2017-03-17T07:42:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>ES2016</code>在2016年6月已经正式发布了。相比<code>ES2015(ES6)</code>,<code>ES2016</code>的新特性并不多，所以可能大家也并没有对其作太多的关注，但是并不表示这些新特性就不重要。本文将会对ES2016的部分新特性作一个介绍。</p>
+<h3 id="Array-includes"><a href="#Array-includes" class="headerlink" title="Array.includes"></a>Array.includes</h3><p>数组的新方法<code>includes(element, [fromIndex])</code>用以检查数组中是否存在<code>element</code>元素，然后返回一个布尔值(true/false)。可选的<code>fromIndex</code>允许指定开始搜索的位置。</p>
+<p>基础用法如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> elements = [<span class="string">'pig'</span>, <span class="string">'dog'</span>, <span class="string">'cat'</span>]</div><div class="line">elements.includes(<span class="string">'pig'</span>)	<span class="comment">// =&gt; true</span></div><div class="line">elements.includes(<span class="string">'horse'</span>)	<span class="comment">// =&gt; false</span></div></pre></td></tr></table></figure></p>
+<p><code>pig</code>存在于<code>elements</code>数组中，所以<code>includes</code>方法返回<code>true</code>。而对于<code>horse</code>，由于其在<code>elements</code>数组中不存在，故返回<code>false</code>。</p>
+<p>需要注意的是，<code>includes()</code>方法必须匹配到严格相等的类型才会返回<code>true</code>。也就是说，<code>includes()</code>方法在比较的时候相当于<code>===</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> items = [<span class="number">1</span>, <span class="string">'2'</span>, <span class="number">3</span>]</div><div class="line">items.includes(<span class="number">2</span>) 	<span class="comment">// =&gt; false</span></div><div class="line">items.includes(<span class="number">3</span>) 	<span class="comment">// =&gt; true</span></div></pre></td></tr></table></figure>
+<p>当匹配对象的时候，<code>includes()</code>方法比较的是对象的引用是否相同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(name) &#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> personA = <span class="keyword">new</span> Person(<span class="string">'Linda'</span>)</div><div class="line"><span class="keyword">const</span> personB = <span class="keyword">new</span> Person(<span class="string">'Calvin'</span>)</div><div class="line"></div><div class="line"><span class="keyword">const</span> persons = [personA, <span class="keyword">new</span> Person(<span class="string">'Calvin'</span>)]</div><div class="line"></div><div class="line">persons.includes(personA) 	<span class="comment">// =&gt; true</span></div><div class="line">persons.includes(personB) 	<span class="comment">// =&gt; false</span></div></pre></td></tr></table></figure>
+<p>在使用可选参数<code>fromIndex</code>时的使用方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> companies = [<span class="string">'baidu'</span>, <span class="string">'alibaba'</span>, <span class="string">'tencent'</span>]</div><div class="line">companies.includes(<span class="string">'baidu'</span>, <span class="number">1</span>) 	<span class="comment">// =&gt; false</span></div><div class="line">companies.includes(<span class="string">'tencent'</span>, <span class="number">1</span>) 	<span class="comment">// =&gt; true</span></div><div class="line">companies.includes(<span class="string">'alibaba'</span>, <span class="number">5</span>) 	<span class="comment">// =&gt; false</span></div></pre></td></tr></table></figure></p>
+<p><code>includes()</code>有一个特别的地方需要注意。我们知道，<code>NaN === NaN</code>返回的是<code>false</code>。但是，<code>includes()</code>方法却能查找数组中的<code>NaN</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="literal">NaN</span>]</div><div class="line">array.includes(<span class="literal">NaN</span>) 	<span class="comment">// =&gt; true</span></div></pre></td></tr></table></figure>
+<h3 id="乘方运算符"><a href="#乘方运算符" class="headerlink" title="乘方运算符"></a>乘方运算符</h3><p>ES2016中的乘方运算符<code>**</code>允许你作乘方运算，这在一些场景中会减少一些比较恶心的<code>for</code>循环运算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">2</span> ** <span class="number">3</span> 	<span class="comment">// =&gt; 8</span></div><div class="line"><span class="number">6</span> ** <span class="number">2</span> 	<span class="comment">// =&gt; 36</span></div><div class="line"><span class="number">0.8</span> ** <span class="number">1</span> 	<span class="comment">// =&gt; 0.8</span></div></pre></td></tr></table></figure>
+<p>我们知道，在基本运算（加减乘除）中，有简写的<code>+=</code>、<code>-=</code>、<code>*=</code>和<code>/=</code>操作。同样，对于乘方运算符，也有这样的简写方式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> number = <span class="number">3</span></div><div class="line">number **= <span class="number">3</span></div><div class="line">number;	<span class="comment">// =&gt; 27</span></div></pre></td></tr></table></figure>
+<p>对于乘方运算的一些特殊情况：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="number">10</span> ** <span class="number">0</span> 	<span class="comment">// =&gt; 1</span></div><div class="line"><span class="literal">NaN</span> ** <span class="number">0</span> 	<span class="comment">// =&gt; 1</span></div><div class="line"><span class="literal">Infinity</span> ** <span class="number">0</span> 	<span class="comment">// =&gt; 1</span></div><div class="line"></div><div class="line"><span class="number">10</span> ** <span class="literal">NaN</span> 	<span class="comment">// =&gt; NaN</span></div><div class="line"><span class="literal">NaN</span> ** <span class="literal">NaN</span> 	<span class="comment">// =&gt; NaN</span></div></pre></td></tr></table></figure></p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>目前最新版的<code>Chrome</code>浏览器已经完全支持这些新特性，所以你完全可以在不依赖<code>babel</code>的情况下使用这些新特性。</p>
+<p>嗯，暂且先这样。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;ES2016&lt;/code&gt;在2016年6月已经正式发布了。相比&lt;code&gt;ES2015(ES6)&lt;/code&gt;,&lt;code&gt;ES2016&lt;/code&gt;的新特性并不多，所以可能大家也并没有对其作太多的关注，但是并不表示这些新特性就不重要。本文将会对ES2016的部
+    
+    </summary>
+    
+      <category term="Web开发" scheme="http://www.ruanjiawei.com/categories/Web%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="web" scheme="http://www.ruanjiawei.com/tags/web/"/>
     
   </entry>
   
